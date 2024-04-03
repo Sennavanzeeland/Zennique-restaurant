@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+.gebruikers-lijst {
+  margin-top: -24%;
+  width: 40%;
+  height: 100%;
+  /* background-color: #f13636; */
+}
+
+.gebruikers {
+  width: 100%;
+  height: 85%;
+  /* background-color: rgb(122, 72, 72); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.users {
+  width: 65%;
+  height: 12%;
+  /* background-color: green; */
+  margin-top: 22%;
+  margin-left: 11%;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+}
+.id {
+  font-size: 40px;
+  color: #ffffff;
+  margin-bottom: 7%;
+  text-align: left;
+}
+.user-name {
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: 1%;
+  text-align: left;
+}
+.s {
+  font-size: 18px;
+  color: #ffffff;
+  margin-top: 2%;
+  text-align: left;
+}
