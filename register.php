@@ -1,7 +1,6 @@
 <?php
-session_start(); // Start de sessie (indien nog niet gestart)
+session_start(); 
 
-// Databaseverbinding
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -9,18 +8,17 @@ $dbname = "restaurant";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Controleer de databaseverbinding
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Als het formulier is verzonden
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ontvang de ingevoerde gegevens van het formulier
+  
     $username = $_POST['uname'];
     $password = $_POST['password'];
 
-    // Voeg de gebruiker toe aan de 'users'-tabel
+
     $sql = "INSERT INTO users (user_name, password) VALUES ('$username', '$password')";
     
     if ($conn->query($sql) === TRUE) {

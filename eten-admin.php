@@ -97,31 +97,28 @@ if(isset($_POST['verwijderen'])){
         
         $naam = $_POST['naam'];
 
-        // Maak verbinding met de database
+      
         $servername = "localhost";
         $username = "root";
         $password = "";
         $dbname = "restaurant";
         $conn = new mysqli($servername, $username, $password, $dbname);
 
-        // Controleer de verbinding
         if ($conn->connect_error) {
             die("Connectie mislukt: " . $conn->connect_error);
         }
 
-        // Voorbereide instructie om SQL-injectie te voorkomen
         $sql = "DELETE FROM menu WHERE naam = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $naam);
 
-        // Voer de query uit
+  
         if ($stmt->execute()) {
-            // echo "<p>Item is succesvol verwijderd.</p>";
+          
         } else {
             echo "Er is een fout opgetreden bij het verwijderen van het item.";
         }
 
-        // Sluit de verbinding
         $stmt->close();
         $conn->close();
     } else {
