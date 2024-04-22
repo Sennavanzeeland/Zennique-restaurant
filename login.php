@@ -1,9 +1,10 @@
 <?php
+session_start(); 
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "restaurant";
-
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -12,20 +13,20 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$username = $_POST['uname'];
-$password = $_POST['password'];
+    $username = $_POST['uname'];
+    $password = $_POST['password'];
 
+    $sql = "SELECT * FROM users WHERE user_name='$username' AND password='$password'";
+    $result = $conn->query($sql);
 
-$sql = "SELECT * FROM users WHERE user_name='$username' AND password='$password'";
-$result = $conn->query($sql);
-
-if ($result->num_rows == 1) {
-
-$_SESSION['username'] = $username;
-header("location: home-admin.php");  
-} else {
-$error = "Gebruikersnaam of wachtwoord is onjuist";
-} 
+    if ($result->num_rows == 1) {
+      
+        $_SESSION['username'] = $username;
+        header("location: home-admin.php"); 
+        exit;
+    } else {
+        $error = "Gebruikersnaam of wachtwoord is onjuist";
+    } 
 }
 ?>
 <!DOCTYPE html>
@@ -42,7 +43,7 @@ $error = "Gebruikersnaam of wachtwoord is onjuist";
 
 <body>
     <?php
-    include ('navbar.html');
+    include('navbar.html');
     ?>
 
     <form action="login.php" method="post">

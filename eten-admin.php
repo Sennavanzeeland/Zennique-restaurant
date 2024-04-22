@@ -89,15 +89,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
                 <div class="delete">
-                    <?php
+                    <?php if (isset($_POST['verwijderen'])) {
+    if (!empty($_POST['item_id'])) {
+        $item_id = $_POST['item_id'];
 
-if(isset($_POST['verwijderen'])){
-    
-    if(!empty($_POST['naam'])){
-        
-        $naam = $_POST['naam'];
-
-      
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -108,13 +103,12 @@ if(isset($_POST['verwijderen'])){
             die("Connectie mislukt: " . $conn->connect_error);
         }
 
-        $sql = "DELETE FROM menu WHERE naam = ?";
+        $sql = "DELETE FROM menu WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $naam);
+        $stmt->bind_param("i", $item_id);
 
-  
         if ($stmt->execute()) {
-          
+           
         } else {
             echo "Er is een fout opgetreden bij het verwijderen van het item.";
         }
@@ -122,15 +116,14 @@ if(isset($_POST['verwijderen'])){
         $stmt->close();
         $conn->close();
     } else {
-        echo "<p>Itemnaam is niet opgegeven.</p>";
+        echo "<p>Item ID is niet opgegeven.</p>";
     }
 }
 ?>
-
                     <h2>Item Verwijderen</h2>
                     <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-                        <label for="naam">Naam:</label><br>
-                        <input type="text" id="naam" name="naam"><br><br>
+                        <label for="item_id">Item ID:</label><br>
+                        <input type="text" id="item_id" name="item_id"><br><br>
                         <input type="submit" name="verwijderen" value="Verwijderen">
                     </form>
                 </div>
